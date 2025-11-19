@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tano Digital Solutions - Empowering Through Innovation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #000814;
+            color: #fff;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(135deg, #000814 0%, #001d3d 50%, #003566 100%);
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 180, 216, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveGrid 20s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.15;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00b4d8, #0077b6);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #ff6b35, #ff8500);
+            border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #06ffa5, #00d9ff);
+            border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            33% {
+                transform: translate(30px, -50px) rotate(120deg);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) rotate(240deg);
+            }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            background: rgba(0, 8, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 1rem 5%;
+            background: rgba(0, 8, 20, 0.95);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00b4d8;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #00b4d8, #0077b6);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00b4d8, #0077b6);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #00b4d8, #0077b6);
+            border: none;
+            border-radius: 50px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 180, 216, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 180, 216, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #ff6b35, #00b4d8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-text h1 .blue-text {
+            background: linear-gradient(135deg, #00b4d8, #06ffa5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInRight 1s ease 0.3s backwards;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-image-container {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 180, 216, 0.3);
+        }
+
+        .hero-image-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00b4d8, #ff6b35, #06ffa5);
+            border-radius: 20px;
+            z-index: -1;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .floating-icons {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 180, 216, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .icon-1 {
+            top: 10%;
+            left: -5%;
+            animation-delay: 0s;
+        }
+
+        .icon-2 {
+            top: 50%;
+            right: -5%;
+            animation-delay: 1s;
+        }
+
+        /* Mission Section */
+        .mission {
+            position: relative;
+            padding: 6rem 5%;
+            z-index: 2;
+        }
+
+        .mission-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #fff, #00b4d8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mission-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            border-radius: 30px;
+            padding: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 180, 216, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        .mission-text {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: #e0e0e0;
+            margin-bottom: 2rem;
+        }
+
+        /* Partnerships */
+        .partnerships {
+            position: relative;
+            padding: 6rem 5%;
+            z-index: 2;
+            background: rgba(0, 180, 216, 0.05);
+        }
+
+        .partnerships-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .partnership-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .partner-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 180, 216, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-10px);
+            border-color: #00b4d8;
+            box-shadow: 0 15px 40px rgba(0, 180, 216, 0.3);
+        }
+
+        .partner-logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00b4d8, #06ffa5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .partner-tagline {
+            color: #e0e0e0;
+            font-size: 0.9rem;
+        }
+
+        /* Regional Presence */
+        .regional {
+            position: relative;
+            padding: 6rem 5%;
+            z-index: 2;
+        }
+
+        .regional-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .country-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 180, 216, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .country-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(0, 180, 216, 0.2);
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+        }
+
+        .country-card:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .country-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: #00b4d8;
+            box-shadow: 0 20px 50px rgba(0, 180, 216, 0.4);
+        }
+
+        .country-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .country-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #00b4d8;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            padding: 4rem 5% 2rem;
+            background: rgba(0, 8, 20, 0.95);
+            border-top: 1px solid rgba(0, 180, 216, 0.2);
+            z-index: 2;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 2fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: #00b4d8;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #00b4d8;
+            padding-left: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(0, 180, 216, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(135deg, #00b4d8, #0077b6);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 180, 216, 0.4);
+        }
+
+        .footer-countries {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .footer-country {
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .footer-country:hover {
+            color: #00b4d8;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 180, 216, 0.1);
+            color: #888;
+        }
+
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .partnerships-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="animated-bg"></div>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <header id="header">
+        <nav>
+            <div class="logo">
+                <div class="logo-icon">T</div>
+                TANO
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#solutions">Our Solutions</a></li>
+                <li><a href="#news">News & Blogs</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#career">Career</a></li>
+            </ul>
+            <button class="cta-button">Get Quote</button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>
+                    EMPOWERING YOUR BUSINESS
+                    <span class="blue-text">THROUGH DIGITAL INNOVATION</span>
+                </h1>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-container">
+                    <div
+                        style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(0,180,216,0.2), rgba(255,107,53,0.2)); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                        💼
+                    </div>
+                </div>
+                <div class="floating-icons icon-1">📊</div>
+                <div class="floating-icons icon-2">🔄</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mission">
+        <div class="mission-content">
+            <h2 class="section-title">UNLOCK THE FUTURE TODAY!</h2>
+            <div class="mission-box">
+                <p class="mission-text">
+                    In the vast realm of technology, Tano Digital Solutions' mandate revolves around people and their
+                    access to transformative services. With our unwavering commitment to the continent, we have been on
+                    a mission to expand our footprint across various countries.
+                </p>
+                <p class="mission-text">
+                    Driven by our belief in the power of technology to bridge the digital divide, we understand that
+                    each country has unique challenges and requirements. We are integrators who recognise the importance
+                    of tailoring solutions to address these specific needs, making a meaningful impact.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="partnerships">
+        <div class="partnerships-content">
+            <div>
+                <h2 class="section-title">PARTNERSHIPS</h2>
+                <p class="mission-text">
+                    Tano Digital Solutions is an award-winning digital services company leveraging on partnerships with
+                    some of the world's most respected technology providers.
+                </p>
+            </div>
+            <div class="partnership-cards">
+                <div class="partner-card">
+                    <div class="partner-logo">THALES</div>
+                    <p class="partner-tagline">Trusted Accelerator</p>
+                    <p class="partner-tagline" style="margin-top: 1rem; font-weight: 600;">SHAPING THE FUTURE</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">ORACLE</div>
+                    <p class="partner-tagline">Gold Partner</p>
+                    <p class="partner-tagline" style="margin-top: 1rem; font-weight: 600;">BETTER TOGETHER</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="regional">
+        <div class="regional-content">
+            <h2 class="section-title" style="text-align: center;">REGIONAL PRESENCE</h2>
+            <p class="mission-text" style="text-align: center; max-width: 900px; margin: 0 auto 3rem;">
+                Tano Digital Solutions is a new generation company with a growing regional footprint. We aspire to be
+                the partner of choice in the area of business-related technology services for the needs of clients
+                across the continent of Africa.
+            </p>
+            <div class="countries-grid">
+                <div class="country-card">
+                    <div class="country-icon">🇧🇼</div>
+                    <div class="country-name">Botswana</div>
+                </div>
+                <div class="country-card">
+                    <div class="country-icon">🇰🇪</div>
+                    <div class="country-name">Kenya</div>
+                </div>
+                <div class="country-card">
+                    <div class="country-icon">🇬🇧</div>
+                    <div class="country-name">United Kingdom</div>
+                </div>
+                <div class="country-card">
+                    <div class="country-icon">🇿🇲</div>
+                    <div class="country-name">Zambia</div>
+                </div>
+                <div class="country-card">
+                    <div class="country-icon">🇲🇼</div>
+                    <div class="country-name">Malawi</div>
+                </div>
+                <div class="country-card">
+                    <div class="country-icon">🇿🇼</div>
+                    <div class="country-name">Zimbabwe</div>
+                </div>
+                <div class="country-card">
+                    <div class="country-icon">🇲🇿</div>
+                    <div class="country-name">Mozambique</div>
+                </div>
+                <div class="country-card">
+                    <div class="country-icon">🇿🇦</div>
+                    <div class="country-name">South Africa</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo" style="margin-bottom: 1.5rem;">
+                    <div class="logo-icon">T</div>
+                    TANO
+                </div>
+                <p style="color: #e0e0e0; line-height: 1.8;">
+                    Digital Solutions empowering businesses across Africa through innovative technology and strategic
+                    partnerships.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3>PAGES</h3>
+                <ul>
+                    <li><a href="#about">About us</a></li>
+                    <li><a href="#solutions">Our solutions</a></li>
+                    <li><a href="#contact">Contact us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>SOCIAL LINKS</h3>
+                <div class="social-links">
+                    <div class="social-icon">f</div>
+                    <div class="social-icon">𝕏</div>
+                    <div class="social-icon">in</div>
+                    <div class="social-icon">📷</div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>COUNTRIES</h3>
+                <div class="footer-countries">
+                    <div class="footer-country">South Africa</div>
+                    <div class="footer-country">Zimbabwe</div>
+                    <div class="footer-country">Botswana</div>
+                    <div class="footer-country">Mozambique</div>
+                    <div class="footer-country">Malawi</div>
+                    <div class="footer-country">United Kingdom</div>
+                    <div class="footer-country">Kenya</div>
+                    <div class="footer-country">Zambia</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Tano Digital Solutions. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.country-card, .partner-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
